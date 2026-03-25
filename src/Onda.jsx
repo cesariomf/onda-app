@@ -192,13 +192,10 @@ async function ai(prompt, sistema = "", tentativas = 3) {
 
   for (let t = 0; t < tentativas; t++) {
     try {
-      const r = await fetch("https://api.anthropic.com/v1/messages", {
+      const r = await fetch("/api/claude", {
         method:"POST",
         headers:{"Content-Type":"application/json"},
         body:JSON.stringify(body),
-        // iOS Safari precisa de credentials omit explícito
-        credentials:"omit",
-        mode:"cors",
       });
       if (!r.ok) {
         const txt = await r.text().catch(()=>"");
